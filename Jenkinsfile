@@ -3,7 +3,7 @@ pipeline
   agent any
   tools
   {
-		maven 'maven3.3.1'
+		maven 'maven3.9.0'
   }
   stages{
     stage ('checkoutcode')
