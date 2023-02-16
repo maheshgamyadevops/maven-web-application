@@ -1,0 +1,17 @@
+pipeline
+{
+  agent any
+
+  stages{
+    stage ('checkoutcode')
+    {
+        steps
+      {
+             git branch: 'development', credentialsId: 'jenkins_credentials', url: 'https://github.com/maheshgamyadevops/maven-web-application.git'
+      }
+    }
+
+    
+  }
+  
+}
