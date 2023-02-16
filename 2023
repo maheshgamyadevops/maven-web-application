@@ -21,8 +21,16 @@ pipeline
              sh "mvn clean package"
       }
     }
+	stage ('deployToContainer')
+    {
+        steps
+      {
+            deploy adapters: [tomcat9(credentialsId: 'tomcat_credentials', path: '', url: 'http://13.127.24.26:8080/')], contextPath: null, war: '**/maven-web-application.war'
+      }
+    }
 
     
   }
   
 }
+
