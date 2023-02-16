@@ -1,6 +1,10 @@
 pipeline
 {
   agent any
+  tools
+  {
+	maven 'maven3.9.0'
+  }
 
   stages{
     stage ('checkoutcode')
@@ -8,6 +12,13 @@ pipeline
         steps
       {
              git branch: 'development', credentialsId: 'jenkins_credentials', url: 'https://github.com/maheshgamyadevops/maven-web-application.git'
+      }
+    }
+	stage ('build')
+    {
+        steps
+      {
+             sh "mvn clean package"
       }
     }
 
