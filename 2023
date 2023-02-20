@@ -5,6 +5,11 @@ pipeline
   {
 	maven 'maven3.9.0'
   }
+  parameters
+  {
+    choice{name: 'BranchName',choices:['master','development','stage'], description: 'using this we can pass parameters for branch name'}
+   
+  }
 
   stages{
     stage ('checkoutcode')
