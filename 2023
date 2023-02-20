@@ -11,7 +11,7 @@ pipeline
     {
         steps
       {
-             git branch: 'development', credentialsId: 'jenkins_credentials', url: 'https://github.com/maheshgamyadevops/maven-web-application.git'
+             git branch: 'development', credentialsId: 'Git_credentials', url: 'https://github.com/maheshgamyadevops/maven-web-application.git'
       }
     }
 	stage ('build')
@@ -25,14 +25,7 @@ pipeline
     {
         steps
       {
-            deploy adapters: [tomcat9(credentialsId: 'tomcat_credentials', path: '', url: 'http://13.127.24.26:8080/')], contextPath: null, war: '**/maven-web-application.war'
-      }
-    }
-	stage ('oldContainer')
-    {
-        steps
-      {
-            deploy adapters: [tomcat9(credentialsId: 'tomcat_credentials', path: '', url: 'http://43.204.144.220:8080/')], contextPath: null, war: '**/maven-web-application.war'
+            deploy adapters: [tomcat9(credentialsId: 'tomcat_Credentials', path: '', url: 'http://3.111.217.128:8080/')], contextPath: null, war: '**/maven-web-application.war'
       }
     }
     
