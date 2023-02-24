@@ -5,20 +5,28 @@ pipeline
   {
 	maven 'maven3.9.0'
   }
-  parameters
+
+  parameters 
   {
-    choice{name: 'BranchName',choices:['master','development','stage'], description: 'using this we can pass parameters for branch name'}
-   
+  choice choices: ['development', 'master', 'stage'], description: 'select the branch to build', name: 'BranchName'
   }
+
 
   stages{
     stage ('checkoutcode')
     {
         steps
       {
-             git branch: 'development', credentialsId: 'Git_credentials', url: 'https://github.com/maheshgamyadevops/maven-web-application.git'
+            git branch: 'development', credentialsId: 'Git_Credentials', url: 'https://github.com/maheshgamyadevops/maven-web-application.git'
       }
     }
+	stage ('parametirzed') 
+	{
+		steps
+		{
+			echo " branches are ${BranchName} "
+		}
+	}
 	stage ('build')
     {
         steps
@@ -30,12 +38,10 @@ pipeline
     {
         steps
       {
-            deploy adapters: [tomcat9(credentialsId: 'tomcat_Credentials', path: '', url: 'http://3.111.217.128:8080/')], contextPath: null, war: '**/maven-web-application.war'
+            deploy adapters: [tomcat9(credentialsId: 'tomcat_Credentials', path: '', url: 'http://65.2.180.7:8080/')], contextPath: null, onFailure: false, war: '**/maven-web-application.war'
       }
     }
     
   }
   
 }
-
-
